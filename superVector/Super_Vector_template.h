@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <initializer_list>
+#define ascending_factor 2.0f
+#define descending_factor .7f
 
 template <typename T>
 class SuperVector
@@ -43,7 +45,7 @@ private:
 public:
 	SuperVector() : _data(nullptr), _size(0), _capacity(0) {}
 
-	SuperVector(size_t size) : _size(size), _capacity(size * 1.5f)
+	SuperVector(size_t size) : _size(size), _capacity(size * ascending_factor)
 	{
 		_data = new T[_capacity]{};
 	}
@@ -65,7 +67,7 @@ public:
 		other._capacity = 0;
 	}
 
-	SuperVector(std::initializer_list<T> init_list) : _size(init_list.size()), _capacity(init_list.size() * 1.5f)
+	SuperVector(std::initializer_list<T> init_list) : _size(init_list.size()), _capacity(init_list.size() * ascending_factor)
 	{
 		_data = new T[_capacity];
 		size_t index = 0;
@@ -141,7 +143,7 @@ public:
 			_capacity = 5;
 			_data = new T[_capacity];
 		}
-		if (_size == _capacity) ResizeArray(2.0f);
+		if (_size == _capacity) ResizeArray(ascending_factor);
 
 		_data[_size++] = value;
 	}
@@ -155,7 +157,7 @@ public:
 			_data = new T[_capacity];
 		}
 
-		if (_size == _capacity) ResizeArray(2.0f);
+		if (_size == _capacity) ResizeArray(ascending_factor);
 
 		for (size_t i = _size; i > index; i--)
 		{
@@ -174,7 +176,7 @@ public:
 
 		_data[--_size] = _data[_capacity - 1];
 
-		if (_size <= _capacity * 0.7f) ResizeArray(0.7f);
+		if (_size <= _capacity * 0.7f) ResizeArray(descending_factor);
 		return 1;
 	}
 
