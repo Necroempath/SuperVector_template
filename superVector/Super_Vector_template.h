@@ -139,10 +139,8 @@ public:
 
 	void PushBack(T value)
 	{
-		if (!_data) { 
-			_capacity = 5;
-			_data = new T[_capacity];
-		}
+		if (!_data) return 0;
+
 		if (_size == _capacity) ResizeArray(ascending_factor);
 
 		_data[_size++] = value;
@@ -152,10 +150,7 @@ public:
 	{
 		if (index < 0 || index > _size) return 0;
 
-		if (!_data) {
-			_capacity = 5;
-			_data = new T[_capacity];
-		}
+		if (!_data) return 0;
 
 		if (_size == _capacity) ResizeArray(ascending_factor);
 
@@ -174,9 +169,7 @@ public:
 	{
 		if (!_data || _size == 0) return 0;
 
-		_data[--_size] = _data[_capacity - 1];
-
-		if (_size <= _capacity * 0.7f) ResizeArray(descending_factor);
+		if (--_size <= _capacity * 0.7f) ResizeArray(descending_factor);
 		return 1;
 	}
 

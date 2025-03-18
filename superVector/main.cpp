@@ -11,7 +11,7 @@ int main()
 {
     SuperVector<Point> vector {{1,1}, {2,2}, {3,3} };
     SuperVector<Point> vector1 {{1,1}, {2,2}, {3,3} };
-    SuperVector<Point> vector1 {{11,-1}, {-2,-2}, {-3,33} };
+    SuperVector<Point> vector2 {{11,-1}, {-2,-2}, {-3,33} };
     vector += vector1;
     vector.Pop();
     vector.Remove(0);
