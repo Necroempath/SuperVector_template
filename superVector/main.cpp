@@ -2,24 +2,25 @@
 #include <iostream>
 #include "Super_Vector.h"
 
-void DisplayVector(const SuperVector<float>& vector)
+struct Point
 {
-    for (int i = 0; i < vector.Size(); ++i)
-    {
-        std::cout << vector[i] << " ";
-    }
-}
+    int x, y;
+};
 
 int main()
 {
-    SuperVector<double> vector = {1,2,3,4,5};
-    SuperVector<short> vector_1(5);
-    
-   /* std::cout << vector++ << "\n";
-    vector.PushBack(17.2);
-    std::cout << ++vector << "\n";
-    vector.Remove(1);
-    std::cout << vector;*/
+    SuperVector<Point> vector {{1,1}, {2,2}, {3,3} };
+    SuperVector<Point> vector1 {{11,-1}, {-2,-2}, {-3,33} };
+    vector += vector1;
+    vector.Pop();
+    vector.Remove(0);
+    vector.Insert(0, {2,3});
+
+    for (size_t i = 0; i < vector.Size(); i++)
+    {
+        std::cout << vector[i].x << vector[i].y << "\n";
+    }
+
 
     return 0;
 }
