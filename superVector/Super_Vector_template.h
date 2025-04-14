@@ -139,7 +139,7 @@ public:
 
 	void PushBack(T value)
 	{
-		if (!_data) return 0;
+		if (!_data) return;
 
 		if (_size == _capacity) ResizeArray(ascending_factor);
 
