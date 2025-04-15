@@ -45,7 +45,7 @@ private:
 public:
 	SuperVector() : _data(nullptr), _size(0), _capacity(0) {}
 
-	SuperVector(size_t size) : _size(size), _capacity(size * ascending_factor)
+	SuperVector(size_t size) : _size(size), _capacity(size * ascending_factor + 1)
 	{
 		_data = new T[_capacity]{};
 	}
