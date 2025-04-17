@@ -1,20 +1,22 @@
 #pragma once
 #include <iostream>
 #include <initializer_list>
-#define ascending_factor 2.0f
+#define ascending_factor 1.5f
 #define descending_factor .7f
 
 template <typename T>
-class SuperVector
+class vector
 {
 private:
 	T* _data;
 	size_t _size;
 	size_t _capacity;
 
-	SuperVector concat(const SuperVector& vector) const
+	static constexpr size_t CAPACITY = 10;
+
+	vector concat(const vector& vector) const
 	{
-		SuperVector result(_size + vector._size);
+		vector result(_size + vector._size);
 
 		for (size_t i = 0; i < _size; i++)
 		{
@@ -43,14 +45,14 @@ private:
 	}
 
 public:
-	SuperVector() : _data(nullptr), _size(0), _capacity(0) {}
+	vector() : _data(nullptr), _size(0), _capacity(CAPACITY) {}
 
-	SuperVector(size_t size) : _size(size), _capacity(size * ascending_factor + 1)
+	vector(size_t size) : _size(size), _capacity(size * ascending_factor + 1)
 	{
 		_data = new T[_capacity]{};
 	}
 
-	SuperVector(const SuperVector& other) : _size(other._size), _capacity(other._capacity)
+	vector(const vector& other) : _size(other._size), _capacity(other._capacity)
 	{
 		_data = new T[_capacity];
 
@@ -60,14 +62,14 @@ public:
 		}
 	}
 
-	SuperVector(SuperVector&& other) noexcept : _data(other._data), _size(other._size), _capacity(other._capacity)
+	vector(vector&& other) noexcept : _data(other._data), _size(other._size), _capacity(other._capacity)
 	{
 		other._data = nullptr;
 		other._size = 0;
 		other._capacity = 0;
 	}
 
-	SuperVector(std::initializer_list<T> init_list) : _size(init_list.size()), _capacity(init_list.size() * ascending_factor)
+	vector(std::initializer_list<T> init_list) : _size(init_list.size()), _capacity(init_list.size() * ascending_factor)
 	{
 		_data = new T[_capacity];
 		size_t index = 0;
@@ -95,7 +97,7 @@ public:
 			return _data[index];
 	}
 
-	SuperVector& operator=(const SuperVector& vector)
+	vector& operator=(const vector& vector)
 	{
 		if (&vector == this) return *this;
 
@@ -111,7 +113,7 @@ public:
 		return *this;
 	}
 
-	SuperVector& operator=(SuperVector&& vector) noexcept
+	vector& operator=(vector&& vector) noexcept
 	{
 		if (&vector == this) return *this;
 
@@ -126,12 +128,12 @@ public:
 		return *this;
 	}
 
-	SuperVector operator+(const SuperVector& other) const
+	vector operator+(const vector& other) const
 	{
 		return concat(other);
 	}
 
-	SuperVector& operator+=(const SuperVector& other)
+	vector& operator+=(const vector& other)
 	{
 		*this = concat(other);
 		return *this;
@@ -187,10 +189,9 @@ public:
 		return Pop();
 	}
 
-	~SuperVector()
+	~vector()
 	{
 		delete[] _data;
 	}
-
 };
 
