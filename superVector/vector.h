@@ -24,7 +24,7 @@ private:
 		}
 		for (size_t i = _size, j = 0; i < result._size; i++, j++)
 		{
-			result[i] = Vector._data[j];
+			result[i] = vector._data[j];
 		}
 
 		return result;
@@ -113,7 +113,7 @@ public:
 		return *this;
 	}
 
-	Vector& operator=(Vector&& Vector) noexcept
+	Vector& operator=(Vector&& vector) noexcept
 	{
 		if (&vector == this) return *this;
 
